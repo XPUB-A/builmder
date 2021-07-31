@@ -1,5 +1,5 @@
 #!/bin/bash
-git config --global user.name "hugo-adword"
+git config --global user.name "XPUB-A"
 git config --global user.email "00.hugo.ad@gmail.com"
 
 #tg
@@ -11,7 +11,7 @@ tg(){
 }
 
 id=-1001273969756 
-tg $id "DerpFest _Compile _Status: TRIGGERED!.
+tg $id "PE _Compile _Status: TRIGGERED!.
 Triggered _at:- $(date).
 https://cirrus-ci.com/build/$CIRRUS_BUILD_ID
 https://cirrus-ci.com/task/$CIRRUS_TASK_ID"
@@ -19,12 +19,12 @@ https://cirrus-ci.com/task/$CIRRUS_TASK_ID"
 mkdir -p /tmp/rom 
 cd /tmp/rom
 
-repo init -q --no-repo-verify --depth=1 -u git://github.com/DerpFest-11/manifest.git -b 11 -g default,-device,-mips,-darwin,-notdefault
+repo init -q --no-repo-verify --depth=1 -u https://github.com/PixelExperience/manifest -b eleven-plus -g default,-device,-mips,-darwin,-notdefault
 
 repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j 30 || repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j 8
 
 #device
-git clone https://github.com/adnan-44/device_xiaomi_vince --single-branch -b for-me device/xiaomi/vince
+git clone https://github.com/adnan-44/device_xiaomi_vince --single-branch -b for-me-aosp-11 device/xiaomi/vince
 git clone https://github.com/adnan-44/vendor_xiaomi_vince --single-branch -b derp-11 vendor/xiaomi/vince --depth 1
 git clone https://github.com/Blacksuan19/kernel_dark_ages_vince.git --single-branch -b darky kernel/xiaomi/vince
 rm -rf hardware/qcom-caf/wlan && git clone https://android.googlesource.com/platform/hardware/qcom/wlan hardware/qcom-caf/wlan

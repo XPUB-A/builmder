@@ -1,13 +1,11 @@
 #!/bin/bash
 cd /tmp/rom # Depends on where source got synced
 
-curl https://gist.githubusercontent.com/SuperCosmicBeing/c6db35d8abfa480e183a66b71ffca563/raw/3f5f1fc6d02ae767479bda37c04ea417a229f7eb/gms_full.mk >> gms_full.mk
-mv gms_full.mk vendor/gms/
 rm -rf device/generic/opengl-transport
 
 # Normal build steps
 . build/envsetup.sh
-lunch derp_vince-user
+lunch aosp_vince-user
 export CCACHE_DIR=/tmp/ccache
 export CCACHE_EXEC=$(which ccache)
 export USE_CCACHE=1
@@ -23,15 +21,15 @@ tg(){
 	curl -s "https://api.telegram.org/bot${bot_api}/sendmessage" --data "text=$msg&chat_id=${your_telegram_id}&parse_mode=html"
 }
 id=-1001273969756
-tg $id "DerpFest Compile Status: STARTED!.
+tg $id "PE Compile Status: STARTED!.
 Started at:- $(date)."
 
-#mka derp -j8 &
+#mka bacon -j8 &
 #sleep 95m
 #kill %1
 #ccache -s
 
-mka derp -j8 
+mka bacon -j8 
 
 #uploads
 
@@ -42,10 +40,10 @@ echo "$rclone_config" > ~/.config/rclone/rclone.conf
 #	curl --upload-file $1 https://transfer.sh/$(basename $1); echo
 #}
 
-time rclone copy /tmp/rom/out/target/product/vince/D*.zip drive:DerpFest -P
-tg $id "DerpFest Compile Status: \`FINISHED!\`
+time rclone copy /tmp/rom/out/target/product/vince/Pixel*.zip drive:PE -P
+tg $id "PE Compile Status: \`FINISHED!\`
 Finished at:- \`$(date)\`.
-Download Link:https://ancient-bush-fa07.010-hugo-ad.workers.dev/DerpFest/
+Download Link:https://plain-salad-9b42.011-hugo-ad.workers.dev/PE/
 CCache Stats:-
 \`$(ccache -s | sed -n -e "6,9 p" -e "9 q")\`"
 
@@ -61,10 +59,10 @@ com ()
 
 time com ccache 1 # Compression level 1, its enough
 
-tg $id "DerpFest Compile Status:
+tg $id "PE Compile Status:
 ccache uploading started at:- $(date)."
 
 time rclone copy ccache.tar.gz drive:ccache -P 
 
-tg $id "DerpFest Compile Status:
+tg $id "PE Compile Status:
 ccache uploaded at:- $(date)."
