@@ -24,12 +24,12 @@ id=-1001273969756
 tg $id "PE Compile Status: STARTED!.
 Started at:- $(date)."
 
-mka bacon -j8 &
-sleep 95m
-kill %1
-ccache -s
+#mka bacon -j8 &
+#sleep 95m
+#kill %1
+#ccache -s
 
-#mka bacon -j8 
+mka bacon -j8 
 
 #uploads
 
@@ -40,12 +40,13 @@ echo "$rclone_config" > ~/.config/rclone/rclone.conf
 #	curl --upload-file $1 https://transfer.sh/$(basename $1); echo
 #}
 
-#time rclone copy /tmp/rom/out/target/product/vince/Pixel*.zip drive:PE -P
-#tg $id "PE Compile Status: \`FINISHED!\`
-#Finished at:- \`$(date)\`.
-#Download Link:https://plain-salad-9b42.011-hugo-ad.workers.dev/PE/
-#CCache Stats:-
-#\`$(ccache -s | sed -n -e "6,9 p" -e "9 q")\`"
+time rclone copy /tmp/rom/out/target/product/vince/Pixel*.zip drive:PE -P
+time rclone copy out/tar*/pr*/v*/Pix*.sha256sum drive:PE -p
+tg $id "PE Compile Status: \`FINISHED!\`
+Finished at:- \`$(date)\`.
+Download Link:https://plain-salad-9b42.011-hugo-ad.workers.dev/PE/
+CCache Stats:-
+\`$(ccache -s | sed -n -e "6,9 p" -e "9 q")\`"
 
 ccache -s
 
