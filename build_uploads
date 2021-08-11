@@ -41,7 +41,7 @@ echo "$rclone_config" > ~/.config/rclone/rclone.conf
 #}
 
 time rclone copy /tmp/rom/out/target/product/vince/Pixel*.zip drive:PE -P
-time rclone copy out/tar*/pr*/v*/Pix*.sha256sum drive:PE -p
+time rclone copy /tmp/rom/out/tar*/pr*/v*/Pix*.md5 drive:PE -P
 tg $id "PE Compile Status: \`FINISHED!\`
 Finished at:- \`$(date)\`.
 Download Link:https://plain-salad-9b42.011-hugo-ad.workers.dev/PE/
